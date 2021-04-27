@@ -54,7 +54,7 @@ wget http://www.robots.ox.ac.uk/~qwang/resnet.model
 ls | grep siam | xargs -I {} cp resnet.model {}
 ```
 
-#### First Stage Training
+#### First Stage
 Then start the first stage of training:
 ```
 experiments/siammask_base/
@@ -68,6 +68,9 @@ For us it took 10 hours to train 20 epochs on 2 V100 GPUs. However, it may not b
 Download validation data using ```data/get_test_data.sh```. We used VOT2018 data for validation of first stage model.
 
 Modify and use the bash script ```experiments/siammask_base/test_all_mine.sh``` to validate the first stage models. This bash script generates statistics on how many frames of the validation videos where the predicted boudning box does not overlap with the ground truth bounding box. Choose the model with the lowest number of frames lost.
+
+Validation results:
+![image](https://raw.githubusercontent.com/Chris210634/Siammask/main/images/stage-1-validation.PNG)
 
 #### Second Stage
 
@@ -88,15 +91,18 @@ After training, download the DAVIS 2016 or 2017 data. We used the DAVIS2017 trai
 
 Use the script here: ```experiments/siammask_sharp/test_all_mine_1.sh``` to generate the IOU metrics for the second stage model checkpoints (for each segmentation mask threshold setting). Pick the model and threshold with the largest average IOU.
 
-You can use the same bash script on the chosen model to generate results on the test data. Our results are included below and in the results directory.
+Validation results:
+![image](https://raw.githubusercontent.com/Chris210634/Siammask/main/images/stage-2-validation.PNG)
 
-(Put images into results directory).
+You can use the same bash script on the chosen model to generate results on the test data. Our results are included below and in the results directory.
 
 ## Results
 
 ### DAVIS Results
 Average IOU: *0.643*
 Standard Deviation: *0.182*
+
+All results are located in ```results``` folder.
 
 The standard deviation seems relatively high. In some of the test cases the model performed very well, but in others it performed poorly.
 
