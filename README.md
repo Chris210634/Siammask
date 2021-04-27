@@ -25,7 +25,7 @@ Below are the results of the different test sets:
 ![image](https://user-images.githubusercontent.com/17884767/116179448-5e9cfb80-a6e5-11eb-8ddd-f82f0a24d469.png)
 
 ### Recycling data
-For the recycling data, there was no ground-truth to make a quantitative measurement against. Instead we looked at the segmentation results qualitatively. The model seems to perform decently, but the image blurring from the supplied video seem to negatively affect the tracking.
+For the recycling data, there was no ground-truth to make a quantitative measurement against. Instead we looked at the segmentation results qualitatively. The model seems to perform decently, but the image blurring from the supplied video seem to negatively affect the tracking. Also the object cluttering in the video.
 
 To select the object to track, we used the supplied GUI object selector from the SiamMask repository.
 
