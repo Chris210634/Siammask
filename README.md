@@ -70,6 +70,7 @@ Download validation data using ```data/get_test_data.sh```. We used VOT2018 data
 Modify and use the bash script ```experiments/siammask_base/test_all_mine.sh``` to validate the first stage models. This bash script generates statistics on how many frames of the validation videos where the predicted boudning box does not overlap with the ground truth bounding box. Choose the model with the lowest number of frames lost.
 
 Validation results:
+
 ![image](https://raw.githubusercontent.com/Chris210634/Siammask/main/images/stage-1-validation.PNG)
 
 #### Second Stage
@@ -92,6 +93,7 @@ After training, download the DAVIS 2016 or 2017 data. We used the DAVIS2017 trai
 Use the script here: ```experiments/siammask_sharp/test_all_mine_1.sh``` to generate the IOU metrics for the second stage model checkpoints (for each segmentation mask threshold setting). Pick the model and threshold with the largest average IOU.
 
 Validation results:
+
 ![image](https://raw.githubusercontent.com/Chris210634/Siammask/main/images/stage-2-validation.PNG)
 
 You can use the same bash script on the chosen model to generate results on the test data. Our results are included below and in the results directory.
