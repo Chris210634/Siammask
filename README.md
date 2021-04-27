@@ -106,11 +106,24 @@ Below are the results across the 30 deifferent test videos of DAVIS 2017 test se
 
 ![image](https://user-images.githubusercontent.com/17884767/116179448-5e9cfb80-a6e5-11eb-8ddd-f82f0a24d469.png)
 
+#### Good Examples on DAVIS
+
+Generally, the Siammask model performs well under the following conditions:
+ * Only one instance of object being tracked (even if that object changes shape or orientation).
+
 ![image](https://raw.githubusercontent.com/Chris210634/Siammask/main/results/DAVIS2017/blackswan.jpg)
 ![image](https://raw.githubusercontent.com/Chris210634/Siammask/main/results/DAVIS2017/goat.jpg)
 ![image](https://raw.githubusercontent.com/Chris210634/Siammask/main/results/DAVIS2017/libby.jpg)
 ![image](https://raw.githubusercontent.com/Chris210634/Siammask/main/results/DAVIS2017/dog.jpg)
 ![image](https://raw.githubusercontent.com/Chris210634/Siammask/main/results/DAVIS2017/car-shadow.jpg)
+
+#### Failure Examples on DAVIS
+
+Generally, the Siammask model performs badly under the following conditions:
+ *  Multiple instances of objects/animals/people being tracked.
+ *  Too much detail in the segmentation (e.g. strings).
+ *  Similar objects to the object being tracked are present in the scene.
+ *  "ill-defined" segmentations. For example, if a person is wearing different colored shirt and pants, the model may only track the pants or the shirt becuase they are individually better segmentations. Or, if the object has similar color and texture to the background, e.g. if tracking a sheet of white paper moving across w white table.
 
 ![image](https://raw.githubusercontent.com/Chris210634/Siammask/main/results/DAVIS2017/gold-fish.jpg)
 ![image](https://raw.githubusercontent.com/Chris210634/Siammask/main/results/DAVIS2017/breakdance.jpg)
