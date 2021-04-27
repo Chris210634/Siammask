@@ -46,7 +46,7 @@ modify ```experiments/siammask_base/config.json``` to point to the copy of the d
 
 You can use ```copy_data.sh``` to copy data from a file share. It is important to group files into one tar file when copying to and from a file share.
 
-For the first stage of training, download a pre-trainined res-net:
+For the first stage of training, download a pre-trained res-net:
 
 ```
 cd experiments
