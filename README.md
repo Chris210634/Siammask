@@ -1,25 +1,27 @@
 # SiamMask Implementation
 
-This repository is an application of the SiamMask object tracking algorithm presented in the *Fast Online Object Tracking and Segmentation: A Unifying Approach* paper. We trained and validated the model against different test datasets, and applied it to recycling data.
+This repository is an application of the SiamMask object tracking and segmentation algorithm presented in the *Fast Online Object Tracking and Segmentation: A Unifying Approach* paper. We trained and validated the model against different test datasets, and applied it to recycling data.
 
 ## Code Execution
 
-
 The model has two stages of training:
 
-1. Rough tracking
-2. Segmentation mask refinement
+1. Rough tracking.
+2. Segmentation mask refinement.
 
-In each stage, we trained the model on the supplied data sets and selected the best model for each. For rough tracking, the best model was the model that had the most amount of frames where the predicted bounding box overlapped with the ground-truth bounding box. The segmentation mask refinement model was selected based on the *intersection-over-union* (IOU) value. We applied this model to the DAVIS test dataset and the recycling data.
+In each stage, we trained the model on the supplied datasets and selected the best model for each. For rough tracking, the best model was the model that had the most amount of frames where the predicted bounding box overlapped with the ground-truth bounding box. The segmentation mask refinement model was selected based on the *intersection-over-union* (IOU) value. We applied this model to the DAVIS test dataset and the recycling data.
 
 ### Setup
 
 For general instructions on how to run the code, please go to https://github.com/foolwood/SiamMask. For this project, we have modified the code to run on BU's Shared Computing Cluster (SCC). The instructions below are specific to the SCC.
 
-You need a machisne with at least 1 GPU. We ran it on a system with a V100 GPU. We trained with 2 V100 GPUs. Testing is possible without a GPU, but it will not achieve real time performance.
+You need a machine with at least 1 GPU. We trained with 2 V100 GPUs. Testing is possible without a GPU, but it will not achieve real time performance.
 
-On the SCC, load anaconda with ```module load miniconda```
+On the SCC, load anaconda with 
 
+```module load miniconda```
+
+Initialize the conda enviornment.
 ```
 conda create -n siammask python=3.6
 source activate siammask
@@ -30,12 +32,15 @@ export PYTHONPATH=$PWD:$PYTHONPATH
 
 ### Training 
 
-For both first and second stage training, we us three datasets: Youtube-VOS, ImageNet-VID, and COCO datasets. Youtube-VOS is small. COCO and ImageNet-VID datasets are around 50 GB. Each of these datasets contain many small files. It is IMPORTANT that you unzip these files in a LOCAL disk and then convert to .tar file for future use. On the SCC, use the scratch disk for this purpose.
+For both first and second stage training, we use three datasets: Youtube-VOS, ImageNet-VID, and COCO datasets. Youtube-VOS is small. COCO and ImageNet-VID datasets are around 50 GB each. Each of these datasets contain many small files. It is IMPORTANT that you unzip these files in a LOCAL disk and then convert to .tar file for future use. On the SCC, use the scratch disk for this purpose.
 
 Instructions for downloading each of the datasets can be found in the following three folders:
+
+```
 data/vid
 data/coco
 data/ytb_vos
+```
 
 modify experiments/siammask_base/config.json to point to the copy of the data  you have locally (on the scratch disk).
 
