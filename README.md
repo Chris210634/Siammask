@@ -61,9 +61,11 @@ experiments/siammask_base/
 bash run.sh
 ```
 
-For us it took 10 hours to train 20 epochs on 2 V100 GPUs. However, it may not be mecessary to train the model for more than ~10 epochs. Please see our validation plot for reference.
+For us it took 10 hours to train 20 epochs on 2 V100 GPUs. However, it may not be necessary to train the model for more than ~10 epochs. Please see our validation plot for reference.
 
--Tensor board here-
+Tensor board files will appear in ```experiments/siammask_base/board```. You should see plots that look like this (Note that our training was interrupted around epoch 9, so you see a discontinuity in the plots):
+
+![image](https://raw.githubusercontent.com/Chris210634/Siammask/main/images/stage-1-tensorboard.PNG)
 
 Download validation data using ```data/get_test_data.sh```. We used VOT2018 data for validation of first stage model.
 
@@ -86,7 +88,9 @@ bash run.sh checkpoint_e10.pth
 
 This stage of training only trains the mask branch of the siammask network, so you should only see the mask loss decrease over training iterations.
 
-(Tensorboard here)
+Tensor board files will appear in ```experiments/siammask_sharp/board```. You should see plots that look like this (Note that only the mask loss decreases becuase stage 2 training is only concerned with improving segmentation mask):
+
+![image](https://raw.githubusercontent.com/Chris210634/Siammask/main/images/stage-2-tensorboard.PNG)
 
 After training, download the DAVIS 2016 or 2017 data. We used the DAVIS2017 training data for validation of the second stage model and the DAVIS2017 validation data for testing of the second stage model.
 
