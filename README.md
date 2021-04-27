@@ -5,9 +5,16 @@ This repository is an application of the SiamMask object tracking algorithm pres
 ## Code Execution
 ** *NEED HELP ON THIS ONE* **
 
+The model has two stages of training:
+
+1. Rough tracking
+2. Segmentation mask refinement
+
+In each stage, we trained the model on the supplied data sets and selected the best model for each. For rough tracking, the best model was the model that had the most amount of frames where the predicted bounding box overlapped with the ground-truth bounding box. The segmentation mask refinement model was selected based on the *intersection-over-union* (IOU) value. We applied this model to the DAVIS test dataset and the recycling data.
+
 ## Results
 
-### Davis Results
+### DAVIS Results
 Average IOU: 0.643
 Standard Deviation: 0.182
 
