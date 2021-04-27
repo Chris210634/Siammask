@@ -106,12 +106,64 @@ Below are the results across the 30 deifferent test videos of DAVIS 2017 test se
 
 ![image](https://user-images.githubusercontent.com/17884767/116179448-5e9cfb80-a6e5-11eb-8ddd-f82f0a24d469.png)
 
+#### Good Examples on DAVIS
 
+Generally, the Siammask model performs well under the following conditions:
+ * Only one instance of object being tracked (even if that object changes shape or orientation).
+
+![image](https://raw.githubusercontent.com/Chris210634/Siammask/main/results/DAVIS2017/blackswan.jpg)
+![image](https://raw.githubusercontent.com/Chris210634/Siammask/main/results/DAVIS2017/goat.jpg)
+![image](https://raw.githubusercontent.com/Chris210634/Siammask/main/results/DAVIS2017/libby.jpg)
+![image](https://raw.githubusercontent.com/Chris210634/Siammask/main/results/DAVIS2017/dog.jpg)
+![image](https://raw.githubusercontent.com/Chris210634/Siammask/main/results/DAVIS2017/car-shadow.jpg)
+
+#### Failure Examples on DAVIS
+
+Generally, the Siammask model performs badly under the following conditions:
+ *  Multiple instances of objects/animals/people being tracked.
+ *  Too much detail in the segmentation (e.g. strings).
+ *  Similar objects to the object being tracked are present in the scene.
+ *  "ill-defined" segmentations. For example, if a person is wearing different colored shirt and pants, the model may only track the pants or the shirt becuase they are individually better segmentations. Or, if the object has similar color and texture to the background, e.g. if tracking a sheet of white paper moving across a white table.
+
+*It is unclear* whether the above failure cases can be attributed to the trainging data or the model architecture/parameters. The distribution of the DAVIS data is different from the distribution of the training data (There are very few training examples provided with teh DAVIS data). 
+
+In order to improve the accuracy for these cases, we need more similar training data. We should also re-examine how the model produces a segmentation mask to address the los of detail issue.
+
+![image](https://raw.githubusercontent.com/Chris210634/Siammask/main/results/DAVIS2017/gold-fish.jpg)
+![image](https://raw.githubusercontent.com/Chris210634/Siammask/main/results/DAVIS2017/breakdance.jpg)
+![image](https://raw.githubusercontent.com/Chris210634/Siammask/main/results/DAVIS2017/india.jpg)
+![image](https://raw.githubusercontent.com/Chris210634/Siammask/main/results/DAVIS2017/pigs.jpg)
+![image](https://raw.githubusercontent.com/Chris210634/Siammask/main/results/DAVIS2017/kite-surf.jpg)
 
 ### Recycling data
 For the recycling data, there was no ground-truth to make a quantitative measurement against. Instead we looked at the segmentation results qualitatively. The model seems to perform decently, but the image blurring from the supplied video seem to negatively affect the tracking. Also the object cluttering in the video.
 
 To select the object to track, we used the supplied GUI object selector from the SiamMask repository.
+
+In the following examples, the first image is given. The blue box outlines the object we wwant to track. We display the tracking result every ten frames. The red transparency mask represents the predicted tracking mask, and the green outline represents the minimum bounding box.
+
+#### Examples
+First two examples where our tracking/segmentation was bad:
+
+(1) Tracking initialized with half of the piece of paper. When the piece of paper comes into full view, the model is still able to track it. However, after a few frames, the model loses track of the paper.
+![image](https://raw.githubusercontent.com/Chris210634/Siammask/main/results/Recycling/recycle287-0.jpg)
+![image](https://raw.githubusercontent.com/Chris210634/Siammask/main/results/Recycling/recycle287-1.jpg)
+
+(2) In this example, out tracker is unable to distinguish between different pieces of crumpled paper. 
+![image](https://raw.githubusercontent.com/Chris210634/Siammask/main/results/Recycling/recycle317-0.jpg)
+![image](https://raw.githubusercontent.com/Chris210634/Siammask/main/results/Recycling/recycle317-1.jpg)
+
+Then, here are two examples where out model performs well:
+
+(1) Tracking a crumbled piece of paper.
+![image](https://raw.githubusercontent.com/Chris210634/Siammask/main/results/Recycling/recycle514-0.jpg)
+![image](https://raw.githubusercontent.com/Chris210634/Siammask/main/results/Recycling/recycle514-1.jpg)
+
+(2) Tracking a plastic bottle.
+![image](https://raw.githubusercontent.com/Chris210634/Siammask/main/results/Recycling/recycle868-0.jpg)
+![image](https://raw.githubusercontent.com/Chris210634/Siammask/main/results/Recycling/recycle868-1.jpg)
+
+The recycling dataset was easy in the sense that the objects being tracked do not change shape or orientation throughout the video. However, the recycling dataset is challenging in the sense that (1) the frames are blurry, (2) the objecst have irregular shapes, and (3) many similar instances of objects exist in the scene (such as crumpled pieces of paper). These factors contribute to unreliability of our model in this case.
 
 ## Citations
 
