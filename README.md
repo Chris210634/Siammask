@@ -3,7 +3,7 @@
 This repository is an application of the SiamMask object tracking algorithm presented in the *Fast Online Object Tracking and Segmentation: A Unifying Approach* paper. We trained and validated the model against different test datasets, and applied it to recycling data.
 
 ## Code Execution
-** *NEED HELP ON THIS ONE* **
+
 
 The model has two stages of training:
 
@@ -11,6 +11,77 @@ The model has two stages of training:
 2. Segmentation mask refinement
 
 In each stage, we trained the model on the supplied data sets and selected the best model for each. For rough tracking, the best model was the model that had the most amount of frames where the predicted bounding box overlapped with the ground-truth bounding box. The segmentation mask refinement model was selected based on the *intersection-over-union* (IOU) value. We applied this model to the DAVIS test dataset and the recycling data.
+
+### Setup
+
+For general instructions on how to run the code, please go to https://github.com/foolwood/SiamMask. For this project, we have modified the code to run on BU's Shared Computing Cluster (SCC). The instructions below are specific to the SCC.
+
+You need a machisne with at least 1 GPU. We ran it on a system with a V100 GPU. We trained with 2 V100 GPUs. Testing is possible without a GPU, but it will not achieve real time performance.
+
+On the SCC, load anaconda with ```module load miniconda```
+
+```
+conda create -n siammask python=3.6
+source activate siammask
+pip install -r requirements.txt
+bash make.sh
+export PYTHONPATH=$PWD:$PYTHONPATH
+```
+
+### Training 
+
+For both first and second stage training, we us three datasets: Youtube-VOS, ImageNet-VID, and COCO datasets. Youtube-VOS is small. COCO and ImageNet-VID datasets are around 50 GB. Each of these datasets contain many small files. It is IMPORTANT that you unzip these files in a LOCAL disk and then convert to .tar file for future use. On the SCC, use the scratch disk for this purpose.
+
+Instructions for downloading each of the datasets can be found in the following three folders:
+data/vid
+data/coco
+data/ytb_vos
+
+modify experiments/siammask_base/config.json to point to the copy of the data  you have locally (on the scratch disk).
+
+You can use copy_data.sh to copy data from a file share. It is important to group files into one tar file when copying to and from a file share.
+
+For the first stage of training, download a pre-trainined resnet:
+
+```
+cd experiments
+wget http://www.robots.ox.ac.uk/~qwang/resnet.model
+ls | grep siam | xargs -I {} cp resnet.model {}
+```
+
+Then start the first stage of training:
+```
+experiments/siammask_base/
+bash run.sh
+```
+
+It took me 10 hours to train 20 epochs on 2 V100 GPUs. However, it may not be mecessary to train the model for more than ~10 epochs. Please see our validation plot for reference.
+
+-Tensor board here-
+
+Download validation data using data/get_test_data.sh. We used VOT2018 data for validation of first stage model.
+
+Modify and use the bash script experiments/siammask_base/test_all_mine.sh to validate the first stage models. This bash script generates statistics on how many frames of the validation videos where the predicted Tracking box does not overlap with the ground truth bounding box. Choose the model with the lowest number of frames lost.
+
+For the second stage of training, we use the Youtube-VOS and COCO datasets. Edit the config.json file in experiements/siammask_sharp/config.json to be the path to the datasets in your local disk. 
+
+Copy your best checkpoint from the first stage model to the experiments/siammask_sharp directory. The model in the second stage will be initialized with the weights from the first stage model. Run the following to train the second stage model. In our case, the accuracy of the model did not improve significantly on validation data after the firset few epochs of training. So 10 epochs of training should be sufficient.
+
+```
+cd experiments/siammask_sharp
+bash run.sh checkpoint_e10.pth
+```
+This stage of training only trains the mask branch of the network, so you should only see the mask loss decrease over training iterations.
+
+(Tensorboard here)
+
+After training, download the DAVIS 2016 or 2017 data. We used the DAVIS2017 training data for validation of the second stage model and the DAVIS2107 validation data for testing of the second stage model.
+
+Use the script here: experiments/siammask_sharp/test_all_mine_1.sh to generate the IOU metrics for the model checkpoints (for each segmentation mask threshold setting). Pick the model and threshold with the largest average IOU.
+
+You can use the same bash script on the chosen model to get results on the test data. Our results are included below and in the results directory.
+
+(Put images into results directory).
 
 ## Results
 
