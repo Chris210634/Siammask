@@ -46,7 +46,7 @@ modify ```experiments/siammask_base/config.json``` to point to the copy of the d
 
 You can use ```copy_data.sh``` to copy data from a file share. It is important to group files into one tar file when copying to and from a file share.
 
-For the first stage of training, download a pre-trainined resnet:
+For the first stage of training, download a pre-trainined res-net:
 
 ```
 cd experiments
@@ -54,37 +54,41 @@ wget http://www.robots.ox.ac.uk/~qwang/resnet.model
 ls | grep siam | xargs -I {} cp resnet.model {}
 ```
 
+#### First Stage Training
 Then start the first stage of training:
 ```
 experiments/siammask_base/
 bash run.sh
 ```
 
-It took me 10 hours to train 20 epochs on 2 V100 GPUs. However, it may not be mecessary to train the model for more than ~10 epochs. Please see our validation plot for reference.
+For us it took 10 hours to train 20 epochs on 2 V100 GPUs. However, it may not be mecessary to train the model for more than ~10 epochs. Please see our validation plot for reference.
 
 -Tensor board here-
 
-Download validation data using data/get_test_data.sh. We used VOT2018 data for validation of first stage model.
+Download validation data using ```data/get_test_data.sh```. We used VOT2018 data for validation of first stage model.
 
-Modify and use the bash script experiments/siammask_base/test_all_mine.sh to validate the first stage models. This bash script generates statistics on how many frames of the validation videos where the predicted Tracking box does not overlap with the ground truth bounding box. Choose the model with the lowest number of frames lost.
+Modify and use the bash script ```experiments/siammask_base/test_all_mine.sh``` to validate the first stage models. This bash script generates statistics on how many frames of the validation videos where the predicted boudning box does not overlap with the ground truth bounding box. Choose the model with the lowest number of frames lost.
 
-For the second stage of training, we use the Youtube-VOS and COCO datasets. Edit the config.json file in experiements/siammask_sharp/config.json to be the path to the datasets in your local disk. 
+#### Second Stage
 
-Copy your best checkpoint from the first stage model to the experiments/siammask_sharp directory. The model in the second stage will be initialized with the weights from the first stage model. Run the following to train the second stage model. In our case, the accuracy of the model did not improve significantly on validation data after the firset few epochs of training. So 10 epochs of training should be sufficient.
+For the second stage of training, we use the Youtube-VOS and COCO datasets. Edit the ```config.json``` file in ```experiements/siammask_sharp/config.json``` to point to the path to the datasets in your local disk. 
+
+Copy your best checkpoint from the first stage model to the ```experiments/siammask_sharp``` directory. The model in the second stage will be initialized with the weights from the first stage model. Run the following to train the second stage model. In our case, the accuracy of the model did not improve significantly on validation data after the firset few epochs of training. So 10 epochs of training should be sufficient.
 
 ```
 cd experiments/siammask_sharp
 bash run.sh checkpoint_e10.pth
 ```
-This stage of training only trains the mask branch of the network, so you should only see the mask loss decrease over training iterations.
+
+This stage of training only trains the mask branch of the siammask network, so you should only see the mask loss decrease over training iterations.
 
 (Tensorboard here)
 
-After training, download the DAVIS 2016 or 2017 data. We used the DAVIS2017 training data for validation of the second stage model and the DAVIS2107 validation data for testing of the second stage model.
+After training, download the DAVIS 2016 or 2017 data. We used the DAVIS2017 training data for validation of the second stage model and the DAVIS2017 validation data for testing of the second stage model.
 
-Use the script here: experiments/siammask_sharp/test_all_mine_1.sh to generate the IOU metrics for the model checkpoints (for each segmentation mask threshold setting). Pick the model and threshold with the largest average IOU.
+Use the script here: ```experiments/siammask_sharp/test_all_mine_1.sh``` to generate the IOU metrics for the second stage model checkpoints (for each segmentation mask threshold setting). Pick the model and threshold with the largest average IOU.
 
-You can use the same bash script on the chosen model to get results on the test data. Our results are included below and in the results directory.
+You can use the same bash script on the chosen model to generate results on the test data. Our results are included below and in the results directory.
 
 (Put images into results directory).
 
