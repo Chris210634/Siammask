@@ -141,9 +141,9 @@ Generally, the Siammask model performs badly under the following conditions:
  *  Similar objects to the object being tracked are present in the scene.
  *  "ill-defined" segmentations. For example, if a person is wearing different colored shirt and pants, the model may only track the pants or the shirt becuase they are individually better segmentations. Or for exmaple, if the object has similar color and texture to the background, the model may fail to produce a good segmentation mask.
 
-*It is unclear* whether the above failure cases can be attributed to the trainging data or the model architecture/parameters. The distribution of the DAVIS data is different from the distribution of the training data (There are very few training examples provided with teh DAVIS data). 
+*It is unclear* whether the above failure cases can be attributed to the trainging data or the model architecture/parameters. The distribution of the DAVIS data is different from the distribution of the training data (There are very few training examples provided with the DAVIS data). 
 
-In order to improve the accuracy for these cases, we need more similar training data. We should also re-examine how the model produces a segmentation mask to address the los of detail issue.
+In order to improve the accuracy for these cases, we need more similar training data. We should also re-examine how the model produces a segmentation mask to address the loss of detail issue.
 
 ![image](https://raw.githubusercontent.com/Chris210634/Siammask/main/results/DAVIS2017/gold-fish.jpg)
 ![image](https://raw.githubusercontent.com/Chris210634/Siammask/main/results/DAVIS2017/breakdance.jpg)
@@ -152,11 +152,11 @@ In order to improve the accuracy for these cases, we need more similar training 
 ![image](https://raw.githubusercontent.com/Chris210634/Siammask/main/results/DAVIS2017/kite-surf.jpg)
 
 ### Recycling data
-For the recycling data, there was no ground-truth to make a quantitative measurement against. Instead we looked at the segmentation results qualitatively. The model seems to perform decently, but the image blurring from the supplied video seem to negatively affect the tracking. Also the object cluttering in the video.
+For the recycling data, there was no ground-truth to make a quantitative measurement against. Instead we looked at the segmentation results qualitatively. The model seems to perform decently, but the image blurring from the supplied video seems to negatively affect the tracking. Additionally, the objects in the video are cluttered and have similar texture, making accurate segmentation difficult.
 
-To select the object to track, we used the supplied GUI object selector from the SiamMask repository.
+To select an object to track, we used the supplied GUI object selector from the SiamMask repository.
 
-In the following examples, the first image is given. The blue box outlines the object we wwant to track. We display the tracking result every ten frames. The red transparency mask represents the predicted tracking mask, and the green outline represents the minimum bounding box.
+In the following examples, the first image is given. The blue box outlines the object we want to track. We display the tracking result every ten frames. The red transparency mask represents the predicted tracking mask, and the green outline represents the minimum bounding box.
 
 #### Examples
 First two examples where our tracking/segmentation was bad:
@@ -169,7 +169,7 @@ First two examples where our tracking/segmentation was bad:
 ![image](https://raw.githubusercontent.com/Chris210634/Siammask/main/results/Recycling/recycle317-0.jpg)
 ![image](https://raw.githubusercontent.com/Chris210634/Siammask/main/results/Recycling/recycle317-1.jpg)
 
-Then, here are two examples where out model performs well:
+Here are two examples where out model performs well:
 
 (1) Tracking a crumbled piece of paper.
 ![image](https://raw.githubusercontent.com/Chris210634/Siammask/main/results/Recycling/recycle514-0.jpg)
