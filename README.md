@@ -106,7 +106,7 @@ Below are the results across the 30 deifferent test videos of DAVIS 2017 test se
 
 ![image](https://user-images.githubusercontent.com/17884767/116179448-5e9cfb80-a6e5-11eb-8ddd-f82f0a24d469.png)
 
-![image](https://github.com/Chris210634/Siammask/results/DAVIS2017/blackswan.jpg?raw=true)
+![image](https://github.com/Chris210634/Siammask/tree/main/results/DAVIS2017/blackswan.jpg?raw=true)
 
 ### Recycling data
 For the recycling data, there was no ground-truth to make a quantitative measurement against. Instead we looked at the segmentation results qualitatively. The model seems to perform decently, but the image blurring from the supplied video seem to negatively affect the tracking. Also the object cluttering in the video.
