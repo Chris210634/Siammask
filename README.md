@@ -142,9 +142,12 @@ To select the object to track, we used the supplied GUI object selector from the
 
 In the following examples, the first image is given. The blue box outlines the object we wwant to track. We display the tracking result every ten frames. The red transparency mask represents the predicted tracking mask, and the green outline represents the minimum bounding box.
 
+#### Examples
 First two examples where our tracking/segmentation was bad:
 
 (1) Tracking initialized with half of the piece of paper. When the piece of paper comes into full view, the model is still able to track it. However, after a few frames, the model loses track of the paper.
+![image](https://raw.githubusercontent.com/Chris210634/Siammask/main/results/Recylcing/recycle287-0.jpg)
+![image](https://raw.githubusercontent.com/Chris210634/Siammask/main/results/Recylcing/recycle287-1.jpg)
 
 (2) In this example, out tracker is unable to distinguish between different pieces of crumpled paper. 
 
