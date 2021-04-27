@@ -14,6 +14,8 @@ __pycache__/
 *log_test.txt
 experiments/siammask_base/logs/
 experiments/siammask_base/logs_train/
+experiments/siammask_sharp/demo_out/
+
 */snapshot/*
 data/input/
 data/trackdat/

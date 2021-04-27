@@ -5,6 +5,7 @@
 # --------------------------------------------------------
 import glob
 from tools.test import *
+from random import randrange
 
 parser = argparse.ArgumentParser(description='PyTorch Tracking Demo')
 
@@ -36,7 +37,7 @@ if __name__ == '__main__':
     # Parse Image file
     img_files = sorted(glob.glob(join(args.base_path, '*.PN*')))
     print(img_files)
-    ims = [cv2.imread(imf) for imf in img_files[130:150]]
+    ims = [cv2.imread(imf) for imf in img_files[50:180]]
 
     #img_files = sorted(glob.glob(join(args.base_path, '*.jp*')))
     #ims = [cv2.imread(imf) for imf in img_files]
@@ -48,7 +49,11 @@ if __name__ == '__main__':
     init_rect = cv2.selectROI('SiamMask', ims[0], False, False)
     x, y, w, h = init_rect
 
+    imm = ims[0]
+    cv2.rectangle(imm, (x, y), (x+w, y+h), (255,0,0), 2)
+
     toc = 0
+    img_list = [imm]
     for f, im in enumerate(ims):
         tic = cv2.getTickCount()
         if f == 0:  # init
@@ -63,12 +68,18 @@ if __name__ == '__main__':
             im[:, :, 2] = (mask > 0) * 255 + (mask == 0) * im[:, :, 2]
             cv2.polylines(im, [np.int0(location).reshape((-1, 1, 2))], True, (0, 255, 0), 3)
             cv2.imshow('SiamMask', im)
-            cv2.imwrite("out.jpg",im)
+            if f % 10 == 0:
+              img_list.append(im)
+              
             key = cv2.waitKey(1)
             if key > 0:
                 break
 
         toc += cv2.getTickCount() - tic
+
+    vis = np.concatenate(img_list, axis=1)
+    cv2.imwrite("demo_out/recycle{}.jpg".format(randrange(1,100000)),vis)
+
     toc /= cv2.getTickFrequency()
     fps = f / toc
     print('SiamMask Time: {:02.1f}s Speed: {:3.1f}fps (with visulization!)'.format(toc, fps))
