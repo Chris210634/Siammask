@@ -75,7 +75,7 @@ Validation results:
 
 ![image](https://raw.githubusercontent.com/Chris210634/Siammask/main/images/stage-1-validation.PNG)
 
-The following image is a visualization of the ouputs of the Siammask model. The siammask model outputs some number of "region proposals". A region propopsal consists of a segmentation mask, the corresponding minimum bounding rectange, and a score. A subset of these proposed regions are shown in yellow in the image. The region proposal with the highest score is highlighted in green. In the first stage, we are only concerned about getting the region roughly right, the second stage will fine-tune. This example should help you understand what is happening under-the-hood.
+The following image is a visualization of the ouputs of the Siammask model. The siammask model outputs some number of "region proposals". A region propopsal consists of a segmentation mask, the corresponding minimum bounding rectange, and a score. A subset of these proposed regions are shown in yellow in the image. The region proposal with the highest score is highlighted in green. In the first stage, we are only concerned about getting the region roughly correct; the second stage will fine-tune. This example should help you understand what is happening under-the-hood.
 
 ![image](https://raw.githubusercontent.com/Chris210634/Siammask/main/images/sheep_rpn_example.jpg)
 
