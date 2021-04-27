@@ -179,7 +179,7 @@ Here are two examples where out model performs well:
 ![image](https://raw.githubusercontent.com/Chris210634/Siammask/main/results/Recycling/recycle868-0.jpg)
 ![image](https://raw.githubusercontent.com/Chris210634/Siammask/main/results/Recycling/recycle868-1.jpg)
 
-The recycling dataset was easy in the sense that the objects being tracked do not change shape or orientation throughout the video. However, the recycling dataset is challenging in the sense that (1) the frames are blurry, (2) the objecst have irregular shapes, and (3) many similar instances of objects exist in the scene (such as crumpled pieces of paper). These factors contribute to unreliability of our model in this case.
+The recycling dataset was easy in the sense that the objects being tracked do not change shape or orientation throughout the video. However, the recycling dataset is challenging in the sense that (1) the frames are blurry, (2) the objects have irregular shapes, and (3) many similar instances of objects exist in the scene (such as crumpled pieces of paper). These factors contribute to unreliability of our model in this case.
 
 ## Citations
 
