@@ -55,7 +55,7 @@ ls | grep siam | xargs -I {} cp resnet.model {}
 ```
 
 #### First Stage
-Then start the first stage of training:
+Use the following command to start the first stage of training:
 ```
 experiments/siammask_base/
 bash run.sh
