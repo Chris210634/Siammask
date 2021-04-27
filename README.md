@@ -116,7 +116,7 @@ All results are located in ```results``` folder.
 
 The standard deviation seems relatively high. In some of the test cases the model performed very well, but in others it performed poorly.
 
-(Note that there is a different measure of segmentation accuracy called F-merasure. This measures the similarity of two contours. We do not report the F-measure results because we do not train the neural network to optimize for this metric. Therefore, the F-measure/contour accuracy is not as relevant to our project. Generally, you should expect our model to perform quite pourly with respect to contour accuracy due to loss of contour detail in segmentation mask.)
+(Note that there is a different measure of segmentation accuracy called F-measure. This measures the similarity of two contours. We do not report the F-measure results because we do not train the neural network to optimize for this metric. Therefore, the F-measure/contour accuracy is not as relevant to our project. Generally, you should expect our model to perform quite pourly with respect to contour accuracy due to loss of contour detail in the segmentation mask.)
 
 Below are the results across the 30 deifferent test videos of DAVIS 2017 test set:
 
