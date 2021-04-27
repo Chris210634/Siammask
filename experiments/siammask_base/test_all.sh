@@ -9,7 +9,7 @@ EOF
 }
 
 ROOT=`git rev-parse --show-toplevel`
-source activate siammask
+#source activate siammask
 export PYTHONPATH=$ROOT:$PYTHONPATH
 export PYTHONPATH=$PWD:$PYTHONPATH
 
@@ -61,23 +61,12 @@ done
 
 set -e
 
-if [ -z "$model" ]; then
     echo test snapshot $START ~ $END on dataset $dataset with $GPU gpus.
     for i in $(seq $START $END)
     do 
-        bash test.sh snapshot/checkpoint_e$i.pth $dataset $(($i % $GPU)) &
+        bash test.sh snapshot/checkpoint_e$i.pth $dataset $(($i % $GPU))
     done
     wait
 
     python $ROOT/tools/eval.py --dataset $dataset --num 20 --tracker_prefix C --result_dir ./test/$dataset 2>&1 | tee logs/eval_test_$dataset.log
-else
-    echo tuning $model on dataset $dataset with $NUM jobs in $GPU gpus.
-    for i in $(seq 1 $NUM)
-    do 
-        bash tune.sh $model $dataset $(($i % $GPU)) & 
-    done
-    wait
-    rm finish.flag
 
-    python $ROOT/tools/eval.py --dataset $dataset --num 20 --tracker_prefix C  --result_dir ./result/$dataset 2>&1 | tee logs/eval_tune_$dataset.log
-fi

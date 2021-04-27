@@ -120,7 +120,7 @@ def main():
         add_file_handler('global', args.log, logging.INFO)
 
     logger = logging.getLogger('global')
-    logger.info("\n" + collect_env_info())
+    #logger.info("\n" + collect_env_info())
     logger.info(args)
 
     cfg = load_config(args)

@@ -48,7 +48,10 @@ class SiamMask(nn.Module):
                       rpn_pred_cls, rpn_pred_loc, rpn_pred_mask):
         rpn_loss_cls = select_cross_entropy_loss(rpn_pred_cls, label_cls)
 
-        rpn_loss_loc = weight_l1_loss(rpn_pred_loc, label_loc, lable_loc_weight)
+        #rpn_loss_loc = weight_l1_loss(rpn_pred_loc, label_loc, lable_loc_weight)
+        rpn_loss_loc = 0
+
+        print("HERE!")
 
         rpn_loss_mask, iou_m, iou_5, iou_7 = select_mask_logistic_loss(rpn_pred_mask, label_mask, label_mask_weight)
 
@@ -58,6 +61,7 @@ class SiamMask(nn.Module):
         """
         run network
         """
+        print("HERE")
         template_feature = self.feature_extractor(template)
         search_feature = self.feature_extractor(search)
         rpn_pred_cls, rpn_pred_loc = self.rpn(template_feature, search_feature)
@@ -103,7 +107,8 @@ class SiamMask(nn.Module):
             rpn_loss_cls, rpn_loss_loc, rpn_loss_mask, iou_acc_mean, iou_acc_5, iou_acc_7 = \
                 self._add_rpn_loss(label_cls, label_loc, lable_loc_weight, label_mask, label_mask_weight,
                                    rpn_pred_cls, rpn_pred_loc, rpn_pred_mask)
-            outputs['losses'] = [rpn_loss_cls, rpn_loss_loc, rpn_loss_mask]
+            #outputs['losses'] = [rpn_loss_cls, rpn_loss_loc, rpn_loss_mask]
+            outputs['losses'] = [rpn_loss_cls, rpn_loss_mask]
             outputs['accuracy'] = [iou_acc_mean, iou_acc_5, iou_acc_7]
 
         return outputs

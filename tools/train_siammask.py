@@ -123,12 +123,20 @@ def main():
     if args.log != "":
         add_file_handler('global', args.log, logging.INFO)
 
+    
+    print("Init logger")
+
     logger = logging.getLogger('global')
-    logger.info("\n" + collect_env_info())
+
+    print(44)
+    #logger.info("\n" + collect_env_info())
+    print(99)
     logger.info(args)
 
     cfg = load_config(args)
     logger.info("config \n{}".format(json.dumps(cfg, indent=4)))
+
+    print(2)
 
     if args.log_dir:
         tb_writer = SummaryWriter(args.log_dir)
@@ -138,12 +146,16 @@ def main():
     # build dataset
     train_loader, val_loader = build_data_loader(cfg)
 
+    print(3)
+
     if args.arch == 'Custom':
         from custom import Custom
         model = Custom(pretrain=True, anchors=cfg['anchors'])
     else:
         exit()
     logger.info(model)
+
+    print(4)
 
     if args.pretrained:
         model = load_pretrain(model, args.pretrained)

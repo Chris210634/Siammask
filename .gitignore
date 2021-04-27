@@ -5,6 +5,29 @@ __pycache__/
 
 # C extensions
 *.so
+*.zip*
+*.pth
+*.tar
+*.model
+*board_train*
+*log.txt
+*log_test.txt
+experiments/siammask_base/logs/
+experiments/siammask_base/logs_train/
+*/snapshot/*
+data/input/
+data/trackdat/
+data/vid/
+data/ytb_vos/
+experiments/siammask_base/test/
+experiments/siammask_base/tacking_test/
+experiments/siammask_base/test.txt
+tools/test/
+.conda/
+data/DAVIS*
+data/VOT*
+data/coco/
+experiments/siammask_sharp/test/
 
 # Distribution / packaging
 .Python

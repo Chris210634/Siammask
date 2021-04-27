@@ -57,7 +57,7 @@ def load_dataset(dataset):
             info[video] = {'image_files': image_files, 'gt': gt, 'name': video}
     elif 'DAVIS' in dataset and 'TEST' not in dataset:
         base_path = join(realpath(dirname(__file__)), '../data', 'DAVIS')
-        list_path = join(realpath(dirname(__file__)), '../data', 'DAVIS', 'ImageSets', dataset[-4:], 'val.txt')
+        list_path = join(realpath(dirname(__file__)), '../data', 'DAVIS2017', 'ImageSets', '2017', 'val.txt')
         with open(list_path) as f:
             videos = [v.strip() for v in f.readlines()]
         for video in videos:

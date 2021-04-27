@@ -27,6 +27,8 @@ if __name__ == '__main__':
     root = join(realpath(dirname(__file__)), '../data')
     tracker_dir = args.result_dir
     trackers = glob.glob(join(tracker_dir, args.tracker_prefix+'*'))
+
+    print("Trackers: ", trackers)
     trackers = [t.split('/')[-1] for t in trackers]
 
     assert len(trackers) > 0

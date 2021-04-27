@@ -111,3 +111,6 @@ class Custom(SiamMask):
         pred_mask = self.mask(self.zf, search)
         return rpn_pred_cls, rpn_pred_loc, pred_mask
 
+    def select_mask_logistic_loss(p_m, mask, weight):
+        return super().select_mask_logistic_loss(p_m, mask, weight)
+

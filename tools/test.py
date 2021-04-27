@@ -571,7 +571,7 @@ def main():
     dataset = load_dataset(args.dataset)
 
     # VOS or VOT?
-    if args.dataset in ['DAVIS2016', 'DAVIS2017', 'ytb_vos'] and args.mask:
+    if args.dataset in ['DAVIS','DAVIS2016', 'DAVIS2017', 'ytb_vos'] and args.mask:
         vos_enable = True  # enable Mask output
     else:
         vos_enable = False
