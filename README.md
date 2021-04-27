@@ -81,16 +81,16 @@ The following image is a visualization of the ouputs of the Siammask model. The 
 
 #### Second Stage
 
-For the second stage of training, we use the Youtube-VOS and COCO datasets. Edit the ```config.json``` file in ```experiements/siammask_sharp/config.json``` to point to the path to the datasets in your local disk. 
+For the second stage of training, we use the Youtube-VOS and COCO datasets. Edit the ```config.json``` file in ```experiements/siammask_sharp/config.json``` to point to the path of the datasets on your local disk. 
 
-Copy your best checkpoint from the first stage model to the ```experiments/siammask_sharp``` directory. The model in the second stage will be initialized with the weights from the first stage model. Run the following to train the second stage model. In our case, the accuracy of the model did not improve significantly on validation data after the firset few epochs of training. So 10 epochs of training should be sufficient.
+Copy your best checkpoint from the first stage model to the ```experiments/siammask_sharp``` directory. The model in the second stage will be initialized with the weights from the first stage model. Run the following to train the second stage model. In our case, the accuracy of the model did not improve significantly on validation data after the first few epochs of training. Around 10 epochs of training should be sufficient.
 
 ```
 cd experiments/siammask_sharp
 bash run.sh checkpoint_e10.pth
 ```
 
-This stage of training only trains the mask branch of the siammask network, so you should only see the mask loss decrease over training iterations.
+This stage of training only trains the mask branch of the siammask network, so only mask loss decreases over training iterations.
 
 Tensor board files will appear in ```experiments/siammask_sharp/board```. You should see plots that look like this (Note that only the mask loss decreases becuase stage 2 training is only concerned with improving segmentation mask):
 
