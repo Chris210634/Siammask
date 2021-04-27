@@ -150,12 +150,18 @@ First two examples where our tracking/segmentation was bad:
 ![image](https://raw.githubusercontent.com/Chris210634/Siammask/main/results/Recycling/recycle287-1.jpg)
 
 (2) In this example, out tracker is unable to distinguish between different pieces of crumpled paper. 
+![image](https://raw.githubusercontent.com/Chris210634/Siammask/main/results/Recycling/recycle317-0.jpg)
+![image](https://raw.githubusercontent.com/Chris210634/Siammask/main/results/Recycling/recycle317-1.jpg)
 
 Then, here are two examples where out model performs well:
 
 (1) Tracking a crumbled piece of paper.
+![image](https://raw.githubusercontent.com/Chris210634/Siammask/main/results/Recycling/recycle514-0.jpg)
+![image](https://raw.githubusercontent.com/Chris210634/Siammask/main/results/Recycling/recycle514-1.jpg)
 
 (2) Tracking a plastic bottle.
+![image](https://raw.githubusercontent.com/Chris210634/Siammask/main/results/Recycling/recycle868-0.jpg)
+![image](https://raw.githubusercontent.com/Chris210634/Siammask/main/results/Recycling/recycle868-1.jpg)
 
 The recycling dataset was easy in the sense that the objects being tracked do not change shape or orientation throughout the video. However, the recycling dataset is challenging in the sense that (1) the frames are blurry, (2) the objecst have irregular shapes, and (3) many similar instances of objects exist in the scene (such as crumpled pieces of paper). These factors contribute to unreliability of our model in this case.
 
