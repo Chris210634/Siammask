@@ -42,9 +42,9 @@ data/coco
 data/ytb_vos
 ```
 
-modify experiments/siammask_base/config.json to point to the copy of the data  you have locally (on the scratch disk).
+modify ```experiments/siammask_base/config.json``` to point to the copy of the data  you have locally (on the scratch disk).
 
-You can use copy_data.sh to copy data from a file share. It is important to group files into one tar file when copying to and from a file share.
+You can use ```copy_data.sh``` to copy data from a file share. It is important to group files into one tar file when copying to and from a file share.
 
 For the first stage of training, download a pre-trainined resnet:
 
