@@ -69,7 +69,7 @@ Tensor board files will appear in ```experiments/siammask_base/board```. You sho
 
 Download validation data using ```data/get_test_data.sh```. We used VOT2018 data for validation of first stage model.
 
-Modify and use the bash script ```experiments/siammask_base/test_all_mine.sh``` to validate the first stage models. This bash script generates statistics on how many frames of the validation videos where the predicted boudning box does not overlap with the ground truth bounding box. **Choose the model with the lowest number of frames lost.**
+Modify and use the bash script ```experiments/siammask_base/test_all_mine.sh``` to validate the first stage models. This bash script generates statistics on how many frames of the validation videos where the predicted bounding box does not overlap with the ground-truth bounding box. **Choose the model with the lowest number of frames lost.**
 
 Validation results:
 
