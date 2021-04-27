@@ -140,6 +140,22 @@ For the recycling data, there was no ground-truth to make a quantitative measure
 
 To select the object to track, we used the supplied GUI object selector from the SiamMask repository.
 
+In the following examples, the first image is given. The blue box outlines the object we wwant to track. We display the tracking result every ten frames. The red transparency mask represents the predicted tracking mask, and the green outline represents the minimum bounding box.
+
+First two examples where our tracking/segmentation was bad:
+
+(1) Tracking initialized with half of the piece of paper. When the piece of paper comes into full view, the model is still able to track it. However, after a few frames, the model loses track of the paper.
+
+(2) In this example, out tracker is unable to distinguish between different pieces of crumpled paper. 
+
+Then, here are two examples where out model performs well:
+
+(1) Tracking a crumbled piece of paper.
+
+(2) Tracking a plastic bottle.
+
+The recycling dataset was easy in the sense that the objects being tracked do not change shape or orientation throughout the video. However, the recycling dataset is challenging in the sense that (1) the frames are blurry, (2) the objecst have irregular shapes, and (3) many similar instances of objects exist in the scene (such as crumpled pieces of paper). These factors contribute to unreliability of our model in this case.
+
 ## Citations
 
 Q. Wang, L. Zhang, L. Bertinetto, W. Hu and P. H. S. Torr, "Fast Online Object Tracking and Segmentation: A Unifying Approach," 2019 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2019, pp. 1328-1338, doi: 10.1109/CVPR.2019.00142.
