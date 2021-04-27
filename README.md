@@ -123,7 +123,11 @@ Generally, the Siammask model performs badly under the following conditions:
  *  Multiple instances of objects/animals/people being tracked.
  *  Too much detail in the segmentation (e.g. strings).
  *  Similar objects to the object being tracked are present in the scene.
- *  "ill-defined" segmentations. For example, if a person is wearing different colored shirt and pants, the model may only track the pants or the shirt becuase they are individually better segmentations. Or, if the object has similar color and texture to the background, e.g. if tracking a sheet of white paper moving across w white table.
+ *  "ill-defined" segmentations. For example, if a person is wearing different colored shirt and pants, the model may only track the pants or the shirt becuase they are individually better segmentations. Or, if the object has similar color and texture to the background, e.g. if tracking a sheet of white paper moving across a white table.
+
+*It is unclear* whether the above failure cases can be attributed to the trainging data or the model architecture/parameters. The distribution of the DAVIS data is different from the distribution of the training data (There are very few training examples provided with teh DAVIS data). 
+
+In order to improve the accuracy for these cases, we need more similar training data. We should also re-examine how the model produces a segmentation mask to address the los of detail issue.
 
 ![image](https://raw.githubusercontent.com/Chris210634/Siammask/main/results/DAVIS2017/gold-fish.jpg)
 ![image](https://raw.githubusercontent.com/Chris210634/Siammask/main/results/DAVIS2017/breakdance.jpg)
