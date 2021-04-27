@@ -100,11 +100,13 @@ Standard Deviation: *0.182*
 
 The standard deviation seems relatively high. In some of the test cases the model performed very well, but in others it performed poorly.
 
-(Note that there is a different measure of segmentation accuracy called F-merasure. This measures the similarity of two contours. We do not report the F-measure results because we do not train the neural network to optimize for this metric. Therefore, the F-measure/contour accuracy is not as relevant to our project. Generally, you should expect our model to perform quite pourly with respect to contour accuracy due to loss of contour detail in segmentation mask.
+(Note that there is a different measure of segmentation accuracy called F-merasure. This measures the similarity of two contours. We do not report the F-measure results because we do not train the neural network to optimize for this metric. Therefore, the F-measure/contour accuracy is not as relevant to our project. Generally, you should expect our model to perform quite pourly with respect to contour accuracy due to loss of contour detail in segmentation mask.)
 
 Below are the results across the 30 deifferent test videos of DAVIS 2017 test set:
 
 ![image](https://user-images.githubusercontent.com/17884767/116179448-5e9cfb80-a6e5-11eb-8ddd-f82f0a24d469.png)
+
+
 
 ### Recycling data
 For the recycling data, there was no ground-truth to make a quantitative measurement against. Instead we looked at the segmentation results qualitatively. The model seems to perform decently, but the image blurring from the supplied video seem to negatively affect the tracking. Also the object cluttering in the video.
